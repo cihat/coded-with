@@ -6,3 +6,10 @@ declare module '*.vue' {
   const component: any
   export default component
 }
+
+declare type LinkType = HTMLAnchorElement | HTMLAreaElement;
+
+type GithubLinksInfo = {
+  link: string
+  language: string
+}
