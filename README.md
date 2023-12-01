@@ -1,4 +1,8 @@
-# WebExtension Vite Starter
+# codificato
+
+<p align='center'>
+  <img src="./src/assets/logo.webp"
+</p>
 
 A [Vite](https://vitejs.dev/) powered WebExtension ([Chrome](https://developer.chrome.com/docs/extensions/reference/), [FireFox](https://addons.mozilla.org/en-US/developers/), etc.) starter template.
 
