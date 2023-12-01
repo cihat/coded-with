@@ -13,8 +13,7 @@ export default class GitHubRepoInfo {
       return repoData.language
     }
     catch (error) {
-      console.error('Error:', error.message)
-      return null
+      return error.message
     }
   }
 
