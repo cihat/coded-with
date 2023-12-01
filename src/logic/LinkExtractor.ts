@@ -30,17 +30,22 @@ export default class LinkExtractor {
     const githubRepoUrlPattern = /^https:\/\/github\.com\/(?!.*(?:new|codespaces|sponsors|settings)\/)[^\/]*\/[^\/]*\/?$/
     const gitHubRepoInfo = await new GitHubRepoInfo()
 
-    for (const uniqueLink of this.uniqueLinks) {
+    const githubLinksPromises = Array.from(this.uniqueLinks).map(async (uniqueLink) => {
       if (githubRepoUrlPattern.test(uniqueLink)) {
         const language = await gitHubRepoInfo.getLanguage(uniqueLink)
 
         if (language !== null) {
-          this.githubLinksInfo.push({
+          return {
             link: uniqueLink,
             language,
-          })
+          }
         }
       }
-    }
+      return null
+    })
+
+    const githubLinks = await Promise.all(githubLinksPromises)
+
+    this.githubLinksInfo = githubLinks.filter(info => info !== null) as GithubLinksInfo[]
   }
 }
