@@ -13,3 +13,5 @@ type GithubLinksInfo = {
   link: string
   language: string
 }
+
+type compareUrls = any
