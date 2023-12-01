@@ -1,9 +1,15 @@
 export default class GitHubRepoInfo {
+  private apiKey = import.meta.env.VITE_GITHUB_API_KEY
+  headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Token ${this.apiKey}`,
+  }
+
   async getLanguage(link: string): Promise<string | null> {
     const { username, projectName } = this.parseGitHubUrl(link) || {}
     try {
       const apiUrl = `https://api.github.com/repos/${username}/${projectName}`
-      const response = await fetch(apiUrl)
+      const response = await fetch(apiUrl, { headers: this.headers })
 
       if (!response.ok)
         throw new Error(`GitHub API error: ${response.status}`)
