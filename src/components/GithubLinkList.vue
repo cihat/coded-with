@@ -17,11 +17,14 @@ onMounted(async () => {
 
 <template>
   <main>
-    <ul>
+    <ul v-if="state.info.length > 0">
       <li v-for="i in state.info" :key="i.link">
         <a :href="i.link">{{ i.link }}</a>
         - {{ i.language }}
       </li>
     </ul>
+    <p v-else>
+      Not found github link
+    </p>
   </main>
 </template>
