@@ -1,28 +1,23 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
-import LinkExtractor from '../logic/LinkExtractor'
-
-const state = reactive({
-  info: [] as GithubLinksInfo[],
-})
-
-onMounted(async () => {
-  const links = Array.from(document.links) as LinkType[]
-  const repos = new LinkExtractor(links)
-  await repos.getGithubLinks()
-
-  state.info.push(...repos.githubLinksInfo)
-})
+const { info, isLoading } = defineProps<{
+  info: GithubLinksInfo[]
+  isLoading: boolean
+}>()
 </script>
 
 <template>
   <main>
-    <ul v-if="state.info.length > 0">
-      <li v-for="i in state.info" :key="i.link">
-        <a :href="i.link">{{ i.link }}</a>
-        - {{ i.language }}
+    <ul v-if="info.length > 0">
+      <li v-for="item in info" :key="item.link">
+        <a :href="item.link">{{ item.link }}</a> - {{ item.language }}
       </li>
     </ul>
+    <div v-else-if="isLoading" flex items-center justify-center>
+      <eos-icons:bubble-loading class="text-lg mr-2" />
+      <p text-lg>
+        Loading
+      </p>
+    </div>
     <p v-else>
       Not found github link
     </p>

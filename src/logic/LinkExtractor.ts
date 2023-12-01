@@ -15,10 +15,7 @@ export default class LinkExtractor {
       return `${parsedUrl.protocol}//${parsedUrl.hostname}${parsedUrl.pathname}`
     }
 
-    const normalizedUrl1 = normalizeUrl(url1)
-    const normalizedUrl2 = normalizeUrl(url2)
-
-    return normalizedUrl1 === normalizedUrl2
+    return normalizeUrl(url1) === normalizeUrl(url2)
   }
 
   addToUniqueLinks(link: string) {
